@@ -1,7 +1,7 @@
 Software Engineering Methods Group 6
 -------
 
-This the group 6's project.
+This is group 6's project.
 
 Group Members are:
 * Clark Bolan 
