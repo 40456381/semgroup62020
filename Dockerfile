@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY /target/classes/com /tmp/com
+COPY ./target/seMethodsGroup6-0.1.0.1-jar-with-dependencies.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "com.napier.sem.group6.HelloWorldApp"]
+ENTRYPOINT ["java", "-jar", "seMethodsGroup6-0.1.0.1-jar-with-dependencies.jar"]
