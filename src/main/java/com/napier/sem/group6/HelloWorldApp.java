@@ -6,4 +6,5 @@ public class HelloWorldApp
     {
         System.out.println("Group 6's first application");
     }
+    //test comment
 }
