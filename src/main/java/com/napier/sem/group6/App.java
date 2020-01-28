@@ -5,6 +5,9 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
+/**
+ * This is our Group six's application
+ */
 public class App
 {
     public static void main(String[] args)
