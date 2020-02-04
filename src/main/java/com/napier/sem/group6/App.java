@@ -2,6 +2,7 @@ package com.napier.sem.group6;
 
 import java.sql.*;
 
+
 public class App
 {
     public static void main(String[] args)
@@ -11,6 +12,10 @@ public class App
 
         // Connect to database
         a.connect();
+        // Get Employee
+        Country cnt = a.getCountry();
+        // Display results
+        a.displayCountry(cnt);
 
         // Disconnect from database
         a.disconnect();
@@ -96,9 +101,9 @@ public class App
             // Check one is returned
             if (rset.next())
             {
-                Country country = new Country();
-                country.name = rset.getString("name");
-                return country;
+                Country cnt = new Country();
+                cnt.name = rset.getString("name");
+                return cnt;
             }
             else
                 return null;
@@ -109,5 +114,15 @@ public class App
             System.out.println("Failed to get country details");
             return null;
         }
+
+        }
+
+            public void displayCountry(Country cnt)
+            {
+                if (cnt != null)
+                {
+                    System.out.println(
+                            cnt.name + "\n");
+                }
+            }
     }
-}
