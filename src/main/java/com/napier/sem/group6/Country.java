@@ -5,8 +5,8 @@ import java.sql.Statement;
 
 /**
  * represents a country
- * @Author Clark Bolan
- * @Date 04/02/2020
+ * Author = Clark Bolan
+ * Date = 04/02/2020
  */
 
 public class Country {
@@ -14,7 +14,11 @@ public class Country {
     /**
      * country name
      */
+    public String code;
     public String name;
-
+    public String continent;
+    public String region;
+    public int population;
+    public int capital;
     }
 

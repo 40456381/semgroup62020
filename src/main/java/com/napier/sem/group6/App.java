@@ -1,6 +1,7 @@
 package com.napier.sem.group6;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class App
@@ -13,9 +14,9 @@ public class App
         // Connect to database
         a.connect();
         // Get Employee
-        Country cnt = a.getCountry();
+        ArrayList<Country> cnt = a.getCountry();
         // Display results
-        a.displayCountry(cnt);
+        a.printCountry(cnt);
 
         // Disconnect from database
         a.disconnect();
@@ -85,8 +86,11 @@ public class App
             }
         }
     }
-
-    public Country getCountry()
+    /**
+     * Gets all countries from the world sorted by population Descending
+     * @return A list of all countries or null if there is an error.
+     */
+    public ArrayList<Country> getCountry()
     {
         try
         {
@@ -94,19 +98,24 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name FROM country ORDER BY Population DESC;";
+                    "SELECT code, name, continent, region, population, capital FROM country ORDER BY Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
+            ArrayList<Country> countries  = new ArrayList<Country>();
             // Check one is returned
-            if (rset.next())
+            while (rset.next())
             {
                 Country cnt = new Country();
+                cnt.code = rset.getString("code");
                 cnt.name = rset.getString("name");
-                return cnt;
+                cnt.continent = rset.getString("continent");
+                cnt.region = rset.getString("region");
+                cnt.population = rset.getInt("population");
+                cnt.capital = rset.getInt("capital");
+                countries.add(cnt);
             }
-            else
-                return null;
+            return countries;
         }
         catch (Exception e)
         {
@@ -116,13 +125,20 @@ public class App
         }
 
         }
-
-            public void displayCountry(Country cnt)
+    /**
+     * Prints a list of countries.
+     * @param countries The list of countries to print.
+     */
+            public void printCountry(ArrayList<Country> countries)
             {
-                if (cnt != null)
+                // Print header
+                System.out.println(String.format("%-10s","Country"));
+                // Loop over all countries in the list
+                for (Country cnt : countries)
                 {
-                    System.out.println(
-                            cnt.name + "\n");
+                    String country_string =
+                            String.format("%-10s", cnt.name);
+                    System.out.println(country_string);
                 }
             }
     }
