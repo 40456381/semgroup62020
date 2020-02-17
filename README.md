@@ -11,3 +11,4 @@ Group Members are:
 * Clark Bolan 
 * Rhodri Bevan
 * Jamie McIntyre
+* Alasdair Fairgrieve
