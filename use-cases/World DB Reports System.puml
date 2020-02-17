@@ -1,0 +1,20 @@
+@startuml
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World DB Reports System"{
+
+usecase UC34 as "All the countries in the world
+                    organised by
+                    largest population to smallest."
+
+usecase UCp as "Print Country"
+
+USER - UC34
+UC34 ..> UCp : include
+UC34 - Database
+
+}
+@enduml

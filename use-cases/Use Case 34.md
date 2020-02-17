@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *user* I want *to produce a report on the population of a city* so that *I can use the data to help me at quiz nights*
+As an *user* I want *to produce a report on the population of a city* so that *I can use the data to help my organisation*
 
 ### Scope
 
@@ -44,7 +44,7 @@ A request from university assessment.
 ## EXTENSIONS
 
 3. **City does not exist**:
-    1. User informs quiz team.
+    1. User informs organisation.
 
 ## SUB-VARIATIONS
 
