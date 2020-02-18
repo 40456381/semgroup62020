@@ -13,10 +13,10 @@ public class App
 
         // Connect to database
         a.connect();
-        // Get Employee
+        // Get countries by population DESC from database
         ArrayList<Country> cnt = a.getCountry();
-        // Display results
-        a.printCountry(cnt);
+        // process results from SQL and display results
+        a.printCountry(cnt); 
 
         // Disconnect from database
         a.disconnect();
