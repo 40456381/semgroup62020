@@ -16,9 +16,12 @@ public class App
         // Connect to database
         a.connect();
         // Get countries by population DESC from database
-        ArrayList<Country> cnt = a.getCountry();
+        //ArrayList<Country> cnt = a.getCountry();
         // process results from SQL and display results
-        a.printCountry(cnt);
+        //a.printCountry(cnt);
+        Continent cont = a.getContinentPopulation("Europe");
+        //printContinent
+        a.printContinent(cont);
 
         // Disconnect from database
         a.disconnect();
@@ -127,6 +130,35 @@ public class App
         }
 
         }
+
+    public Continent getContinentPopulation(String CONT)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "select sum(population), continent from country where continent = '" + CONT + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return population and continent if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Continent cont = new Continent();
+                cont.population = rset.getInt("population");
+                cont.continentName = rset.getString("continent");
+                return cont;
+            } else
+                return null;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+    }
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
@@ -143,5 +175,14 @@ public class App
                                     cnt.code, cnt.name, cnt.continent, cnt.region, cnt.population, cnt.capital);
                     System.out.println(country_string);
                 }
+            }
+
+            public void printContinent(Continent cont){
+                System.out.println(String.format("%-10s %-15s", "population", "continent"));
+                String continent_string =
+                        String.format("%-10s %-15s %-20s %-8s %-8s %-8s",
+                                cont.population, cont.continentName);
+                System.out.println(continent_string);
+
             }
     }
