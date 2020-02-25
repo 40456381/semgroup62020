@@ -131,6 +131,10 @@ public class App
 
         }
 
+    /**
+     * Gets the population of a continent
+     * @return A Continent or null if there is an error.
+     */
     public Continent getContinentPopulation(String CONT)
     {
         try
@@ -177,6 +181,10 @@ public class App
                 }
             }
 
+    /**
+     * Prints population of inputted continent.
+     * @param cont The continent to print.
+     */
             public void printContinent(Continent cont){
                 System.out.println(String.format("%-10s %-15s", "population", "continent"));
                 String continent_string =
