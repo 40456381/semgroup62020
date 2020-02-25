@@ -143,11 +143,14 @@ public class App
 
 
 
-           /* if(rset.next())
+            if(rset.next())
             {
-                rset.
+
+                Population pop = new Population();
+                pop.population = rset.getString();
+                pop.population = rset.getInt(population);
             }
-            */
+
             return strSelect;
 
         }
