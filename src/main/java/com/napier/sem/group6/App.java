@@ -4,9 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-/**
- * This is our Group six's application
- */
 public class App
 {
     public static void main(String[] args)
