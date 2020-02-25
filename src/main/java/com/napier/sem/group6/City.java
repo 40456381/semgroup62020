@@ -28,6 +28,10 @@ public class City {
         this.name = name;
     }
 
+    public String getCity() {
+        return name;
+    }
+
     public String getCountry() {
         return country;
     }

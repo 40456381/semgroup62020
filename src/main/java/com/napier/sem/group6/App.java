@@ -128,6 +128,37 @@ public class App
         }
 
         }
+
+    public String Population()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM (population) FROM country";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+
+
+           /* if(rset.next())
+            {
+                rset.
+            }
+            */
+            return strSelect;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return Population();
+        }
+
+    }
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
