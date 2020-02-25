@@ -3,7 +3,9 @@ package com.napier.sem.group6;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+/**
+main method
+*/
 public class App
 {
     public static void main(String[] args)
@@ -13,10 +15,13 @@ public class App
 
         // Connect to database
         a.connect();
-        // Get Employee
-        ArrayList<Country> cnt = a.getCountry();
-        // Display results
-        a.printCountry(cnt);
+        // Get countries by population DESC from database
+        //ArrayList<Country> cnt = a.getCountry();
+        // process results from SQL and display results
+        //a.printCountry(cnt);
+        Continent cont = a.getContinentPopulation("Europe");
+        //printContinent
+        a.printContinent(cont);
 
         // Disconnect from database
         a.disconnect();
@@ -125,6 +130,39 @@ public class App
         }
 
         }
+
+    /**
+     * Gets the population of a continent
+     * @return A Continent or null if there is a error.
+     */
+    public Continent getContinentPopulation(String CONT)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "select sum(population), continent from country where continent = '" + CONT + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return population and continent if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Continent cont = new Continent();
+                cont.population = rset.getInt(1);
+                cont.continentName = rset.getString("continent");
+                return cont;
+            } else
+                return null;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+
+    }
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
@@ -141,5 +179,18 @@ public class App
                                     cnt.code, cnt.name, cnt.continent, cnt.region, cnt.population, cnt.capital);
                     System.out.println(country_string);
                 }
+            }
+
+    /**
+     * Prints population of inputted continent.
+     * @param cont The continent to print.
+     */
+            public void printContinent(Continent cont){
+                System.out.println(String.format("%-10s %-15s", "population", "continent"));
+                String continent_string =
+                        String.format("%-10s %-15s",
+                                cont.population, cont.continentName);
+                System.out.println(continent_string);
+
             }
     }
