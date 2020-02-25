@@ -181,7 +181,7 @@ public class App
                 System.out.println(String.format("%-10s %-15s", "population", "continent"));
                 String continent_string =
                         String.format("%-10s %-15s %-20s %-8s %-8s %-8s",
-                                cont.population, cont.continentName);
+                                1000000, cont.continentName);
                 System.out.println(continent_string);
 
             }
