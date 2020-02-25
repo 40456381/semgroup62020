@@ -3,7 +3,9 @@ package com.napier.sem.group6;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+/**
+main method
+*/
 public class App
 {
     public static void main(String[] args)
@@ -16,7 +18,7 @@ public class App
         // Get countries by population DESC from database
         ArrayList<Country> cnt = a.getCountry();
         // process results from SQL and display results
-        a.printCountry(cnt); 
+        a.printCountry(cnt);
 
         // Disconnect from database
         a.disconnect();
