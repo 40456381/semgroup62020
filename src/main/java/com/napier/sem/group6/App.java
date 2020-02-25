@@ -147,7 +147,7 @@ public class App
             if (rset.next())
             {
                 Continent cont = new Continent();
-                cont.population = rset.getInt("population");
+                cont.population = rset.getInt(1);
                 cont.continentName = rset.getString("continent");
                 return cont;
             } else
