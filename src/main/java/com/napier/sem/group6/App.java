@@ -133,7 +133,7 @@ public class App
 
     /**
      * Gets the population of a continent
-     * @return A Continent or null if there is an error.
+     * @return A Continent or null if there is a error.
      */
     public Continent getContinentPopulation(String CONT)
     {
