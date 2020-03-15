@@ -2,6 +2,7 @@ package com.napier.semgroup62020;
 
 import com.napier.sem.group6.App;
 import com.napier.sem.group6.Continent;
+import com.napier.sem.group6.Country;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -27,5 +28,13 @@ public class AppIntegrationTest
         Continent cont = app.getContinentPopulation("North America");
         assertEquals(cont.getContinentName(), "North America");
         assertEquals(cont.getPopulation(), 482993000);
+    }
+
+    //test getCountry() method
+    @Test
+    void testGetCountry()
+    {
+        ArrayList<Country> cnt = app.getCountry();
+        assertEquals(cnt.size(), 239 );
     }
 }

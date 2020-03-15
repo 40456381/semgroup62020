@@ -13,14 +13,20 @@ public class App
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect("localhost:33060");
 
+        // Connect to database
+        if (args.length < 2)
+        {
+            a.connect("localhost:33060");
+        }
+        else{
+            a.connect(args[0]);
+        }
         // Get countries by population DESC from database
-        //ArrayList<Country> cnt = a.getCountry();
+        ArrayList<Country> cnt = a.getCountry();
 
         // process results from SQL and display results
-        //a.printCountry(cnt);
+        a.printCountry(cnt);
         Continent cont = a.getContinentPopulation("Europe");
         //printContinent
         a.printContinent(cont);
