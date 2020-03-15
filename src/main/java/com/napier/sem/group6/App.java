@@ -193,12 +193,14 @@ public class App
      * Prints population of inputted continent.
      * @param cont The continent to print.
      */
-            public void printContinent(Continent cont){
-                System.out.println(String.format("%-10s %-15s", "population", "continent"));
-                String continent_string =
-                        String.format("%-10s %-15s",
-                                cont.population, cont.continentName);
-                System.out.println(continent_string);
-
+            public void printContinent(Continent cont)
+            {
+                if(cont != null) {
+                    System.out.println(String.format("%-10s %-15s", "population", "continent"));
+                    String continent_string =
+                            String.format("%-10s %-15s",
+                                    cont.population, cont.continentName);
+                    System.out.println(continent_string);
+                }
             }
     }
