@@ -1,6 +1,7 @@
 package com.napier.semgroup62020;
 
 import com.napier.sem.group6.App;
+import com.napier.sem.group6.Continent;
 import com.napier.sem.group6.Country;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -53,5 +54,25 @@ public class AppTest
         countries.add(cnt);
         app.printCountry(countries);
     }
+    //test null continent
+    @Test
+    void printContinentTestNull()
+    {
+        Continent cont;
+        cont = null;
+        app.printContinent(cont);
+    }
+    //test happy path
+    @Test
+    void printContinent()
+    {
+        Continent cont = new Continent();
+        cont.setContinentName("Europe");
+        cont.setPopulation(100000000);
+        app.printContinent(cont);
+    }
+
+
+
 
 }
