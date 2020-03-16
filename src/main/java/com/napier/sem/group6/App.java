@@ -197,6 +197,18 @@ public class App
                 }
             }
 
+            public void printPopulations(Population pop)
+            {
+                if(pop != null) {
+                    System.out.println(String.format("%-10s %-15s %-15 %-15", "name", "population", "percentage living in cities", "percentage not in cites"));
+                    String population_string =
+                            String.format("%-10s %-15s %-15 %-15",
+                                    pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
+                    System.out.println(population_string);
+                }
+            }
+
+
     /**
      * Prints population of inputted continent.
      * @param cont The continent to print.
