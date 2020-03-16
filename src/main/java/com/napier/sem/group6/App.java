@@ -13,12 +13,20 @@ public class App
         // Create new Application
         App a = new App();
 
+
         // Connect to database
-        a.connect();
+        if (args.length < 2)
+        {
+            a.connect("localhost:33060");
+        }
+        else{
+            a.connect(args[0]);
+        }
         // Get countries by population DESC from database
-        //ArrayList<Country> cnt = a.getCountry();
+        ArrayList<Country> cnt = a.getCountry();
+
         // process results from SQL and display results
-        //a.printCountry(cnt);
+        a.printCountry(cnt);
         Continent cont = a.getContinentPopulation("Europe");
         //printContinent
         a.printContinent(cont);
@@ -35,12 +43,12 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location)
     {
         try
         {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
@@ -57,7 +65,7 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -106,7 +114,7 @@ public class App
                     "SELECT code, name, continent, region, population, capital FROM country ORDER BY Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
+            // Return new country if valid.
             ArrayList<Country> countries  = new ArrayList<Country>();
             // Check one is returned
             while (rset.next())
@@ -169,11 +177,19 @@ public class App
      */
             public void printCountry(ArrayList<Country> countries)
             {
+                //Check countries is not null
+                if (countries == null)
+                {
+                    System.out.println("No countries");
+                    return;
+                }
                 // Print header
                 System.out.println(String.format("%-10s %-15s %-20s %-8s %-8s %-8s", "code", "name", "continent", "region", "population", "capital"));
                 // Loop over all countries in the list
                 for (Country cnt : countries)
                 {
+                    if (cnt == null)
+                        continue;
                     String country_string =
                             String.format("%-10s %-15s %-20s %-8s %-8s %-8s",
                                     cnt.code, cnt.name, cnt.continent, cnt.region, cnt.population, cnt.capital);
@@ -185,12 +201,14 @@ public class App
      * Prints population of inputted continent.
      * @param cont The continent to print.
      */
-            public void printContinent(Continent cont){
-                System.out.println(String.format("%-10s %-15s", "population", "continent"));
-                String continent_string =
-                        String.format("%-10s %-15s",
-                                cont.population, cont.continentName);
-                System.out.println(continent_string);
-
+            public void printContinent(Continent cont)
+            {
+                if(cont != null) {
+                    System.out.println(String.format("%-10s %-15s", "population", "continent"));
+                    String continent_string =
+                            String.format("%-10s %-15s",
+                                    cont.population, cont.continentName);
+                    System.out.println(continent_string);
+                }
             }
     }
