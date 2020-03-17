@@ -32,8 +32,15 @@ public class App
         //a.printContinent(cont);
 
         //get population report
+
         Population pop = a.getPopulation(null, "world");
         a.printPopulations(pop);
+
+
+  //      "***RHODRI UPDATES - START***"
+        Populationn pop = a.getPopulation("countries by continent", null)
+        a.printPopulations(pop);
+    //    "***RHODRI UPDATES - END***"
 
         // Disconnect from database
         a.disconnect();
@@ -219,6 +226,18 @@ public class App
                 strSelect =
                 "select sum(population)as population from city where city = '" + Sname + "'";
             }
+
+
+      //      "***RHODRI UPDATES - START***"
+            else if (SCOPE == "countries by continent ")
+            {
+                strSelect =
+                        "SELECT code, name, continent, region, population, capital FROM country GROUP BY continent ORDER BY population DESC";
+            }
+
+        //    "***RHODRI UPDATES - END***"
+
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return population and continent if valid.
