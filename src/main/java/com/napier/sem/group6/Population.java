@@ -38,9 +38,4 @@ public class Population {
     public void setPopulationNotInCity(int populationNotInCity) {
         this.populationNotInCity = populationNotInCity;
     }
-
-
-
-
-
 }

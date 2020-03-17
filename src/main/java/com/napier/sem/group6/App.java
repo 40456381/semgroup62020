@@ -270,9 +270,11 @@ public class App
             public void printPopulations(Population pop)
             {
                 if(pop != null) {
-                    System.out.println(String.format("%-10s %-15s %-20s %-8s", "name", "population", "percentage_city", "percentage_rural"));
+                    System.out.println(String.format("%-10s %-15s %-20s %-8s",
+                            "name", "population", "percentage_city", "percentage_rural"));
                     String population_string =
-                            String.format("%-10s %-15s %-20s %-8s",pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
+                            String.format("%-10s %-15s %-20s %-8s",
+                            pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
                     System.out.println(population_string);
                 }
             }
