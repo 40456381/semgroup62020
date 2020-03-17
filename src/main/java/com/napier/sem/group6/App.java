@@ -23,13 +23,13 @@ public class App
             a.connect(args[0]);
         }
         // Get countries by population DESC from database
-        ArrayList<Country> cnt = a.getCountry();
+        //ArrayList<Country> cnt = a.getCountry();
 
         // process results from SQL and display results
-        a.printCountry(cnt);
-        Continent cont = a.getContinentPopulation("Europe");
+        //a.printCountry(cnt);
+        //Continent cont = a.getContinentPopulation("Europe");
         //printContinent
-        a.printContinent(cont);
+        //a.printContinent(cont);
 
         //get population report
         Population pop = a.getPopulation(null, "world");
@@ -227,7 +227,9 @@ public class App
             {
                 Population pop = new Population();
                 pop.name = Sname;
-                pop.totalPopulation = rset.getInt("population");
+                pop.totalPopulation = rset.getLong("population");
+                pop.populationLivingInCity = 000000;
+                pop.populationNotInCity = 000000;
                 return pop;
             } else
                 return null;
@@ -268,10 +270,9 @@ public class App
             public void printPopulations(Population pop)
             {
                 if(pop != null) {
-                    System.out.println(String.format("%-10s %-15s %-15 %-15", "name", "population", "percentage living in cities", "percentage not in cites"));
+                    System.out.println(String.format("%-10s %-15s %-20s %-8s", "name", "population", "percentage_city", "percentage_rural"));
                     String population_string =
-                            String.format("%-10s %-15s %-15 %-15",
-                                    pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
+                            String.format("%-10s %-15s %-20s %-8s",pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
                     System.out.println(population_string);
                 }
             }

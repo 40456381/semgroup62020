@@ -3,7 +3,7 @@ package com.napier.sem.group6;
 public class Population {
 
     String name;
-    int totalPopulation;
+    long totalPopulation;
     int populationLivingInCity;
     int populationNotInCity;
 
@@ -15,11 +15,11 @@ public class Population {
         this.name = name;
     }
 
-    public int getTotalPopulation() {
+    public long getTotalPopulation() {
         return totalPopulation;
     }
 
-    public void setTotalPopulation(int totalPopulation) {
+    public void setTotalPopulation(long totalPopulation) {
         this.totalPopulation = totalPopulation;
     }
 
@@ -38,6 +38,8 @@ public class Population {
     public void setPopulationNotInCity(int populationNotInCity) {
         this.populationNotInCity = populationNotInCity;
     }
+
+
 
 
 
