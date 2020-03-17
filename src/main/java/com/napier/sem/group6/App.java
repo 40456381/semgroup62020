@@ -23,13 +23,17 @@ public class App
             a.connect(args[0]);
         }
         // Get countries by population DESC from database
-        ArrayList<Country> cnt = a.getCountry();
+        //ArrayList<Country> cnt = a.getCountry();
 
         // process results from SQL and display results
-        a.printCountry(cnt);
-        Continent cont = a.getContinentPopulation("Europe");
+        //a.printCountry(cnt);
+        //Continent cont = a.getContinentPopulation("Europe");
         //printContinent
-        a.printContinent(cont);
+        //a.printContinent(cont);
+
+        //get population report
+        Population pop = a.getPopulation(null, "world");
+        a.printPopulations(pop);
 
         // Disconnect from database
         a.disconnect();
@@ -169,8 +173,74 @@ public class App
             System.out.println("Failed to get country details");
             return null;
         }
-
     }
+
+    /**
+     * get population based on the SCOPE world (enter null), continent, region, country,
+     * district or city.
+     *
+     */
+    public Population getPopulation(String SCOPE, String Sname)
+    {
+        try
+        {
+            String strSelect = null;
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            if (SCOPE == null)
+
+            {
+                strSelect =
+                        "select sum(population) as population from country;";
+            }
+            else if (SCOPE == "continent")
+            {
+                strSelect =
+                        "select sum(population)as population from country where continent = '" + Sname + "'";
+            }
+            else if (SCOPE == "region")
+            {
+                strSelect =
+                        "select sum(population)as population from country where Region = '" + Sname + "'";
+            }
+            else if (SCOPE == "country")
+            {
+                strSelect =
+                        "select sum(population)as population from country where country = '" + Sname + "'";
+            }
+            else if (SCOPE == "district")
+            {
+                strSelect =
+                "select sum(population)as population from city where district = '" + Sname + "'";
+            }
+            else if (SCOPE == "city")
+            {
+                strSelect =
+                "select sum(population)as population from city where city = '" + Sname + "'";
+            }
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return population and continent if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Population pop = new Population();
+                pop.name = Sname;
+                pop.totalPopulation = rset.getLong("population");
+                pop.populationLivingInCity = 000000;
+                pop.populationNotInCity = 000000;
+                return pop;
+            } else
+                return null;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+            }
+        }
+
+
     /**
      * Prints a list of countries.
      * @param countries The list of countries to print.
@@ -196,6 +266,19 @@ public class App
                     System.out.println(country_string);
                 }
             }
+
+            public void printPopulations(Population pop)
+            {
+                if(pop != null) {
+                    System.out.println(String.format("%-10s %-15s %-20s %-8s",
+                            "name", "population", "percentage_city", "percentage_rural"));
+                    String population_string =
+                            String.format("%-10s %-15s %-20s %-8s",
+                            pop.name, pop.totalPopulation, pop.populationLivingInCity, pop.populationNotInCity);
+                    System.out.println(population_string);
+                }
+            }
+
 
     /**
      * Prints population of inputted continent.
